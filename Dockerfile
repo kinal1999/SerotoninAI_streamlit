@@ -6,7 +6,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y libxext6
+RUN apt-get update && \
+    apt-get install -y libxext6
+
+# Set LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 
 # Create and activate Conda environment
 RUN conda create -y --name for_serotoninAI
