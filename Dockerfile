@@ -1,20 +1,33 @@
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim
+FROM continuumio/miniconda3
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# Create and activate Conda environment
+RUN conda create -y --name for_serotoninAI
+RUN echo "source activate for_serotoninAI" > ~/.bashrc
+ENV PATH /opt/conda/envs/for_serotoninAI/bin:$PATH
+
+# Install RDKit and other dependencies
+RUN conda install -y -c conda-forge rdkit==2023.03.2
+RUN conda install -y -c anaconda scikit-learn==1.2.2
+RUN pip install ipython
+RUN pip install wordcloud==1.9.1.1
+RUN conda install -y -c conda-forge mljar-supervised==1.0.0
+RUN conda install -y -c anaconda numpy==1.26.4 
+RUN conda install -y -c anaconda pandas==1.5.3
+RUN conda install -y -c anaconda seaborn==0.12.2
+RUN conda install -y -c conda-forge matplotlib==3.4.3
+RUN conda install -y -c conda-forge mordred==1.2.0
+RUN pip install scipy==1.11.4
+RUN pip install streamlit==1.27.0
+RUN pip install streamlit-option-menu==0.3.6
+RUN pip install streamlit-ketcher==0.0.1
+
 # Set the working directory in the container
 WORKDIR /app
-
-# Copy the requirements file into the container at /app
-COPY requirements.txt /app/
-
-# Install any needed dependencies specified in requirements.txt
-RUN apt-get update && \
-    apt-get install -y build-essential cmake && \
-    pip install --no-cache-dir -r requirements.txt --no-binary :all: --install-option="--config-settings" --install-option="cmake.define.USE_OPENMP=OFF"
 
 # Copy the Streamlit app file into the container at /app
 COPY app_streamlit_SerotoninAI.py /app/
@@ -22,5 +35,5 @@ COPY app_streamlit_SerotoninAI.py /app/
 # Expose the port the app runs on
 EXPOSE 8501
 
-# Command to run the Streamlit app
-CMD ["streamlit", "run", "--server.port", "8501", "app_streamlit_SerotoninAI.py"]
+# Set entrypoint to run Streamlit app
+ENTRYPOINT ["streamlit", "run", "app_streamlit_SerotoninAI.py"]
