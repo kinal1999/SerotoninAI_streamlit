@@ -1,6 +1,6 @@
 rdkit-pypi==2022.9.5
 scikit-learn==1.2.2
-mljar-supervised==1.0.0
+mljar-supervised
 numpy==1.24.3
 pandas==1.5.3
 seaborn==0.12.2
@@ -10,4 +10,3 @@ streamlit-option-menu==0.3.6
 streamlit-ketcher==0.0.1
 scipy==1.11.4
 lightgbm>=4.0.0
-supervised
