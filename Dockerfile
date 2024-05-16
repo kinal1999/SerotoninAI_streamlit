@@ -32,6 +32,7 @@ RUN pip install scipy==1.11.4
 RUN pip install streamlit==1.27.0
 RUN pip install streamlit-option-menu==0.3.6
 RUN pip install streamlit-ketcher==0.0.1
+RUN pip install supervised
 
 # Set the working directory in the container
 WORKDIR /app
