@@ -22,7 +22,7 @@ RUN conda install -y -c conda-forge rdkit==2023.03.2
 RUN conda install -y -c anaconda scikit-learn==1.2.2
 RUN pip install ipython
 RUN pip install wordcloud==1.9.1.1
-RUN conda install -y -c conda-forge mljar-supervised==1.0.0
+RUN conda install -y -c conda-forge mljar-supervised
 RUN conda install -y -c anaconda numpy==1.26.4 
 RUN conda install -y -c anaconda pandas==1.5.3
 RUN conda install -y -c anaconda seaborn==0.12.2
